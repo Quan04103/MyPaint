@@ -8,34 +8,52 @@ using System.Threading.Tasks;
 
 namespace MyPaint.OOP
 {
-    internal class FillPaternCircle : IEnumerable<Circle_OOP>
+    internal class FillPatternCircle : Shape
     {
-        public LinkedList<Circle_OOP> circles;
+        private List<Circle_OOP> circles;
 
-        public FillPaternCircle()
+        public FillPatternCircle(Point center, int radius, int border, Color borderColor, Color backgroundColor)
+            : base(new Point(center.X - radius, center.Y - radius), border, borderColor, backgroundColor)
         {
-            circles = new LinkedList<Circle_OOP>();
+            circles = new List<Circle_OOP>();
+            AddCircle(center, radius, border, borderColor, backgroundColor);
         }
 
-        public FillPaternCircle(Point center, int radius, int border, Color borderColor, Color backgroundColor)
+        public void AddCircle(Point center, int radius, int border, Color borderColor, Color backgroundColor)
         {
-            circles = new LinkedList<Circle_OOP>();
-            AddPaternCircle(new Circle_OOP(center, radius, border, borderColor, backgroundColor));
+            circles.Add(new Circle_OOP(center, radius, border, borderColor, backgroundColor));
         }
 
-        public void AddPaternCircle(Circle_OOP circle)
+        public override void Draw(Graphics g)
         {
-            circles.AddLast(circle);
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.Draw(g);
+            }
         }
 
-        public IEnumerator<Circle_OOP> GetEnumerator()
+        public override void Fill(Graphics g)
         {
-            return circles.GetEnumerator();
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.Fill(g);
+            }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public override void PatternFill(Graphics g)
         {
-            return GetEnumerator();
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.PatternFill(g);
+            }
+        }
+
+        protected override void FillShape(Graphics g, Brush brush)
+        {
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.Fill(g);
+            }
         }
     }
 }

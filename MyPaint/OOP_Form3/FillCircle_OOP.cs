@@ -8,33 +8,52 @@ using System.Threading.Tasks;
 
 namespace MyPaint.OOP
 {
-    internal class FillCircle_OOP : IEnumerable<Circle_OOP>
+    internal class FillCircle_OOP : Shape
     {
-        public LinkedList<Circle_OOP> circles;
-
-        public FillCircle_OOP()
-        {
-            circles = new LinkedList<Circle_OOP>();
-        }
+        private List<Circle_OOP> circles;
 
         public FillCircle_OOP(Point center, int radius, int border, Color borderColor, Color backgroundColor)
+            : base(new Point(center.X - radius, center.Y - radius), border, borderColor, backgroundColor)
         {
-            circles = new LinkedList<Circle_OOP>();
+            circles = new List<Circle_OOP>();
+            AddCircle(center, radius, border, borderColor, backgroundColor);
         }
 
-        public void AddCircle(Circle_OOP circle)
+        public void AddCircle(Point center, int radius, int border, Color borderColor, Color backgroundColor)
         {
-            circles.AddLast(circle);
+            circles.Add(new Circle_OOP(center, radius, border, borderColor, backgroundColor));
         }
 
-        public IEnumerator<Circle_OOP> GetEnumerator()
+        public override void Draw(Graphics g)
         {
-            return circles.GetEnumerator();
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.Draw(g);
+            }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public override void Fill(Graphics g)
         {
-            return GetEnumerator();
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.Fill(g);
+            }
+        }
+
+        public override void PatternFill(Graphics g)
+        {
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.PatternFill(g);
+            }
+        }
+
+        protected override void FillShape(Graphics g, Brush brush)
+        {
+            foreach (Circle_OOP circle in circles)
+            {
+                circle.Fill(g);
+            }
         }
     }
 }

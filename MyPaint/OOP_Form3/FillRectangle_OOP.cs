@@ -8,32 +8,52 @@ using System.Threading.Tasks;
 
 namespace MyPaint
 {
-    internal class FillRectangle_OOP : IEnumerable<Rectangle_OOP>
+    internal class FillRectangle_OOP : Shape
     {
-        public LinkedList<Rectangle_OOP> rectangles;
-
-        public FillRectangle_OOP()
-        {
-            rectangles = new LinkedList<Rectangle_OOP>();
-        }
+        private List<Rectangle_OOP> rectangles;
 
         public FillRectangle_OOP(Point sPoint, Point ePoint, int border, Color borderColor, Color backgroundColor)
+            : base(new Point(Math.Min(sPoint.X, ePoint.X), Math.Min(sPoint.Y, ePoint.Y)), border, borderColor, backgroundColor)
         {
-            rectangles = new LinkedList<Rectangle_OOP>();
+            rectangles = new List<Rectangle_OOP>();
+            AddRectangle(sPoint, ePoint, border, borderColor, backgroundColor);
         }
 
-        public void AddRectangle(Rectangle_OOP rectangle)
+        public void AddRectangle(Point sPoint, Point ePoint, int border, Color borderColor, Color backgroundColor)
         {
-            rectangles.AddLast(rectangle);
-        }
-        public IEnumerator<Rectangle_OOP> GetEnumerator()
-        {
-            return rectangles.GetEnumerator();
+            rectangles.Add(new Rectangle_OOP(sPoint, ePoint, border, borderColor, backgroundColor));
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public override void Draw(Graphics g)
         {
-            return GetEnumerator();
+            foreach (Rectangle_OOP rectangle in rectangles)
+            {
+                rectangle.Draw(g);
+            }
+        }
+
+        public override void Fill(Graphics g)
+        {
+            foreach (Rectangle_OOP rectangle in rectangles)
+            {
+                rectangle.Fill(g);
+            }
+        }
+
+        public override void PatternFill(Graphics g)
+        {
+            foreach (Rectangle_OOP rectangle in rectangles)
+            {
+                rectangle.PatternFill(g);
+            }
+        }
+
+        protected override void FillShape(Graphics g, Brush brush)
+        {
+            foreach (Rectangle_OOP rectangle in rectangles)
+            {
+                rectangle.Fill(g);
+            }
         }
     }
 }

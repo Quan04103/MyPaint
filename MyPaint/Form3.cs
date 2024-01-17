@@ -18,12 +18,6 @@ namespace MyPaint
         public Point _sPoint;
         private bool _moving;
         private LinkedList<Shape> _shapes;
-        private LinkedList<Rectangle_OOP> _rectangle;
-        private LinkedList<Circle_OOP> _circle;
-        private FillPaternRectangle _fillPaternRectangle;
-        private FillRectangle_OOP _fillRectangles;
-        private FillCircle_OOP _fillCircles;
-        private FillPaternCircle _fillPaternCircles;
         public Form3()
         {
             InitializeComponent();
@@ -31,12 +25,6 @@ namespace MyPaint
             _aPoint = new Point(-1, -1);
             _sPoint = new Point(-1, -1);
             _moving = false;
-            _rectangle = new LinkedList<Rectangle_OOP>();
-            _circle = new LinkedList<Circle_OOP>();
-            _fillPaternRectangle = new FillPaternRectangle();
-            _fillCircles = new FillCircle_OOP();
-            _fillPaternCircles = new FillPaternCircle();
-            _fillRectangles = new FillRectangle_OOP();
             _shapes = new LinkedList<Shape>();
         }
 
@@ -60,17 +48,15 @@ namespace MyPaint
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
                 Rectangle_OOP rect = new Rectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
-                //if (checkBoxColor.Checked)
-                //{
-                //    rect.Fill(_graphic);
-                //}
+                FillRectangle_OOP fillRectangle = new FillRectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
+                FillPatternRectangle fillPatternRectangle = new FillPatternRectangle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 if (ColorFillButton.Checked)
                 {
-                    rect.Fill(_graphic);
+                    fillRectangle.Fill(_graphic);
                 }
                 if (ColorPatternFill.Checked)
                 {
-                    rect.PatternFill(_graphic);
+                    fillPatternRectangle.PatternFill(_graphic);
                 }
                 rect.Draw(_graphic);
             }
@@ -83,17 +69,17 @@ namespace MyPaint
                 Color bgColor = cdBgColor.Color;
                 int radius = (int)Math.Sqrt(Math.Pow(e.X - _sPoint.X, 2) + Math.Pow(e.Y - _sPoint.Y, 2));
                 Circle_OOP circle = new Circle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
-
+                FillCircle_OOP fillCircle = new FillCircle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
+                FillPatternCircle fillPaternCircle = new FillPatternCircle(_sPoint, radius, penWidth, penColor, bgColor);
                 if (ColorFillButton.Checked)
                 {
-                    circle.Fill(_graphic);
+                    fillCircle.Fill(_graphic);
                 }
 
                 if (ColorPatternFill.Checked)
                 {
-                    circle.PatternFill(_graphic);
+                    fillPaternCircle.PatternFill(_graphic);
                 }
-
                 circle.Draw(_graphic);
             }
 
@@ -106,20 +92,13 @@ namespace MyPaint
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
                 Rectangle_OOP rect = new Rectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
-                
-                //if (checkBoxColor.Checked)
-                //{
-                //    _bgRectangles.AddLast(rect);
-                //}
+                FillRectangle_OOP fillRectangle = new FillRectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
+                FillPatternRectangle fillPatternRectangle = new FillPatternRectangle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 if (ColorFillButton.Checked)
-                {
-                    _fillRectangles.AddRectangle(rect);
-                }
+                    _shapes.AddLast(fillRectangle);
                 if (ColorPatternFill.Checked)
-                {
-                    _fillPaternRectangle.AddPaternRectangle(rect);
-                }
-                _rectangle.AddLast(rect);
+                    _shapes.AddLast(fillPatternRectangle);
+                _shapes.AddLast(rect);
                 _sPoint.X = -1;
                 _sPoint.Y = -1;
                 _moving = false;
@@ -131,19 +110,13 @@ namespace MyPaint
                 Color bgColor = cdBgColor.Color;
                 int radius = (int)Math.Sqrt(Math.Pow(e.X - _sPoint.X, 2) + Math.Pow(e.Y - _sPoint.Y, 2));
                 Circle_OOP circle = new Circle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
-                //if (checkBoxColor.Checked)
-                //{
-                //    _bgRectangles.AddLast(rect);
-                //}
+                FillCircle_OOP fillCircle = new FillCircle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
+                FillPatternCircle fillPaternCircle = new FillPatternCircle(_sPoint, radius, penWidth, penColor, bgColor);
                 if (ColorFillButton.Checked)
-                {
-                    _fillCircles.AddCircle(circle);
-                }
+                    _shapes.AddLast(fillCircle);
                 if (ColorPatternFill.Checked)
-                {
-                    _fillPaternCircles.AddPaternCircle(circle);
-                }
-                _circle.AddLast(circle);
+                    _shapes.AddLast(fillPaternCircle);
+                _shapes.AddLast(circle);
                 _sPoint.X = -1;
                 _sPoint.Y = -1;
                 _moving = false;
@@ -154,35 +127,27 @@ namespace MyPaint
         private void RefreshPanel()
         {
             _graphic.Clear(Color.White);
-            foreach (Rectangle_OOP rect in _rectangle)
+
+            foreach (Shape shape in _shapes)
             {
-                rect.Draw(_graphic);
-            }
-            foreach (Rectangle_OOP rect in _fillRectangles)
-            {
-                rect.Draw(_graphic);
-                rect.Fill(_graphic);
-            }
-            foreach (Rectangle_OOP rect in _fillPaternRectangle)
-            {
-                rect.Draw(_graphic);
-                rect.Fill(_graphic);
-                rect.PatternFill(_graphic);
-            }
-            foreach(Circle_OOP circle in _circle)
-            {
-                circle.Draw(_graphic);
-            }
-            foreach (Circle_OOP circle in _fillCircles)
-            {
-                circle.Draw(_graphic);
-                circle.Fill(_graphic);
-            }
-            foreach (Circle_OOP circle in _fillPaternCircles)
-            {
-                circle.Draw(_graphic);
-                circle.Fill(_graphic);
-                circle.PatternFill(_graphic);
+                if (shape is FillRectangle_OOP fillRectangle)
+                {
+                    fillRectangle.Fill(_graphic);
+                }
+                if (shape is FillPatternRectangle patternRectangle)
+                {
+                    patternRectangle.PatternFill(_graphic);
+                }
+                if (shape is FillCircle_OOP fillCircle)
+                {
+                    fillCircle.Fill(_graphic);
+                }
+                if (shape is FillPatternCircle fillPatternCircle)
+                {
+                    fillPatternCircle.PatternFill(_graphic);
+                }
+                shape.Draw(_graphic);
+
             }
         }
 

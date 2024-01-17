@@ -10,39 +10,25 @@ namespace MyPaint
 {
     internal class Rectangle_OOP : Shape
     {
-        public int width;
-        public int height;
-        private Point sPoint;
-        private int penWidth;
-        private Color penColor;
-        private Color bgColor;
+        private int width;
+        private int height;
 
         public Rectangle_OOP(Point sPoint, Point ePoint, int border, Color borderColor, Color backgroundColor)
+            : base(new Point(Math.Min(sPoint.X, ePoint.X), Math.Min(sPoint.Y, ePoint.Y)), border, borderColor, backgroundColor)
         {
-            this.backgroundColor = backgroundColor;
-            location.X = sPoint.X < ePoint.X ? sPoint.X : ePoint.X;
-            location.Y = sPoint.Y < ePoint.Y ? sPoint.Y : ePoint.Y;
             width = Math.Abs(sPoint.X - ePoint.X);
             height = Math.Abs(sPoint.Y - ePoint.Y);
-            this.border = border;
-            this.borderColor = borderColor;
         }
+
         public override void Draw(Graphics g)
         {
             Pen pen = new Pen(borderColor, border);
             g.DrawRectangle(pen, location.X, location.Y, width, height);
         }
 
-        public override void Fill(Graphics g)
+        protected override void FillShape(Graphics g, Brush brush)
         {
-            Brush brush = new SolidBrush(backgroundColor);
             g.FillRectangle(brush, location.X, location.Y, width, height);
-        }
-
-        public override void PatternFill(Graphics g)
-        {
-            HatchBrush hatch = new HatchBrush(HatchStyle.Cross, backgroundColor);
-            g.FillRectangle(hatch, location.X, location.Y, width, height);
         }
     }
 }
