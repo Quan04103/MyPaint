@@ -1,4 +1,6 @@
-﻿using MyPaint.OOP;
+﻿using MyPaint.FactoryMethod;
+using MyPaint.OOP;
+using MyPaint.OOP_Form3.FactoryMethod;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +20,7 @@ namespace MyPaint
         public Point _sPoint;
         private bool _moving;
         private LinkedList<Shape> _shapes;
+        IShapeFactory rectangleFactory;
         public Form3()
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace MyPaint
             _sPoint = new Point(-1, -1);
             _moving = false;
             _shapes = new LinkedList<Shape>();
+            rectangleFactory = new RectangleFactory();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -47,7 +51,7 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                Rectangle_OOP rect = new Rectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
+                Shape rectangle = rectangleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
                 FillRectangle_OOP fillRectangle = new FillRectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
                 FillPatternRectangle fillPatternRectangle = new FillPatternRectangle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 if (ColorFillButton.Checked)
@@ -58,7 +62,7 @@ namespace MyPaint
                 {
                     fillPatternRectangle.PatternFill(_graphic);
                 }
-                rect.Draw(_graphic);
+                rectangle.Draw(_graphic);
             }
             if (CircleBtn.Checked)
             {
