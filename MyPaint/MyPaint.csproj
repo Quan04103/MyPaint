@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OOP_Form3\FactoryMethod\CircleFactory.cs" />
+    <Compile Include="OOP_Form3\FactoryMethod\IShapeFactory.cs" />
     <Compile Include="OOP_Form3\Circle_OOP.cs" />
+    <Compile Include="OOP_Form3\FactoryMethod\RectangleFactory.cs" />
     <Compile Include="OOP_Form3\FillCircle_OOP.cs" />
     <Compile Include="OOP_Form3\FillPaternCircle.cs" />
     <Compile Include="OOP_Form3\FillPaternRectangle.cs" />
@@ -109,5 +112,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
