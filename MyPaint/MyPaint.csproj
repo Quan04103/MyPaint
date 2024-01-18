@@ -48,9 +48,6 @@
   <ItemGroup>
     <Compile Include="OOP_Form3\FactoryMethod\CircleFactory.cs" />
     <Compile Include="OOP_Form3\FactoryMethod\IShapeFactory.cs" />
-    <Compile Include="FactoryMethod\Rectangle_OOP.cs" />
-    <Compile Include="FactoryMethod\Shape.cs" />
-    <Compile Include="FactoryMethod\ShapeFactory.cs" />
     <Compile Include="OOP_Form3\Circle_OOP.cs" />
     <Compile Include="OOP_Form3\FactoryMethod\RectangleFactory.cs" />
     <Compile Include="OOP_Form3\FillCircle_OOP.cs" />
