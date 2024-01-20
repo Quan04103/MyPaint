@@ -21,9 +21,6 @@ namespace MyPaint
         public Point _sPoint;
         private bool _moving;
         private LinkedList<Shape> _shapes;
-        //IShapeFactory rectangleFactory;
-        //IShapeFactory circleFactory;
-        //Abstract factory
         IShapeAbstractFactory factory;
         Rectangle_OOP rect;
         Circle_OOP circle;
@@ -35,11 +32,7 @@ namespace MyPaint
             _sPoint = new Point(-1, -1);
             _moving = false;
             _shapes = new LinkedList<Shape>();
-            //rectangleFactory = new RectangleFactory("nofill");
-            //circleFactory = new CircleFactory("nofill");
-
             factory = ShapeFactory.GetFactory("nofill");
-            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -110,7 +103,6 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                int radius = (int)Math.Sqrt(Math.Pow(e.X - _sPoint.X, 2) + Math.Pow(e.Y - _sPoint.Y, 2));
                 circle = factory.CreateCircle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 _shapes.AddLast(circle);
                 _sPoint.X = -1;
@@ -190,7 +182,7 @@ namespace MyPaint
             {
                 //rectangleFactory = new RectangleFactory("nofill");
                 //circleFactory = new CircleFactory("nofill");
-                factory = ShapeFactory.GetFactory("fillpatern");
+                factory = ShapeFactory.GetFactory("nofill");
             }
         }
     }
