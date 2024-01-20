@@ -12,16 +12,16 @@ namespace MyPaint.OOP
     {
         private List<Circle_OOP> circles;
 
-        public FillCircle_OOP(Point center, int radius, int border, Color borderColor, Color backgroundColor)
-            : base(new Point(center.X - radius, center.Y - radius), border, borderColor, backgroundColor)
+        public FillCircle_OOP(Point sPoint, Point ePoint, int border, Color borderColor, Color backgroundColor)
+    : base(new Point(Math.Min(sPoint.X, ePoint.X), Math.Min(sPoint.Y, ePoint.Y)), border, borderColor, backgroundColor)
         {
             circles = new List<Circle_OOP>();
-            AddCircle(center, radius, border, borderColor, backgroundColor);
+            AddCircle(sPoint, ePoint, border, borderColor, backgroundColor);
         }
 
-        public void AddCircle(Point center, int radius, int border, Color borderColor, Color backgroundColor)
+        public void AddCircle(Point sPoint, Point ePoint, int border, Color borderColor, Color backgroundColor)
         {
-            circles.Add(new Circle_OOP(center, radius, border, borderColor, backgroundColor));
+            circles.Add(new Circle_OOP(sPoint, ePoint, border, borderColor, backgroundColor));
         }
 
         public override void Draw(Graphics g)

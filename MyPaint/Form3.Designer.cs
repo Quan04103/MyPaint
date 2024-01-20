@@ -42,9 +42,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBgColor = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.ColorFillButton = new System.Windows.Forms.RadioButton();
-            this.ColorPatternFill = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.fillBtn = new System.Windows.Forms.RadioButton();
+            this.patternFillBtn = new System.Windows.Forms.RadioButton();
+            this.nofillBtn = new System.Windows.Forms.RadioButton();
             this.cdPenColor = new System.Windows.Forms.ColorDialog();
             this.cdBgColor = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.inpPenWidth)).BeginInit();
@@ -158,9 +158,9 @@
             // 
             this.groupBox2.Controls.Add(this.btnBgColor);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.ColorFillButton);
-            this.groupBox2.Controls.Add(this.ColorPatternFill);
-            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.fillBtn);
+            this.groupBox2.Controls.Add(this.patternFillBtn);
+            this.groupBox2.Controls.Add(this.nofillBtn);
             this.groupBox2.Location = new System.Drawing.Point(1226, 137);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(181, 166);
@@ -187,38 +187,41 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Color";
             // 
-            // ColorFillButton
+            // fillBtn
             // 
-            this.ColorFillButton.AutoSize = true;
-            this.ColorFillButton.Location = new System.Drawing.Point(11, 67);
-            this.ColorFillButton.Name = "ColorFillButton";
-            this.ColorFillButton.Size = new System.Drawing.Size(80, 20);
-            this.ColorFillButton.TabIndex = 1;
-            this.ColorFillButton.TabStop = true;
-            this.ColorFillButton.Text = "Color Fill";
-            this.ColorFillButton.UseVisualStyleBackColor = true;
+            this.fillBtn.AutoSize = true;
+            this.fillBtn.Location = new System.Drawing.Point(11, 67);
+            this.fillBtn.Name = "fillBtn";
+            this.fillBtn.Size = new System.Drawing.Size(80, 20);
+            this.fillBtn.TabIndex = 1;
+            this.fillBtn.TabStop = true;
+            this.fillBtn.Text = "Color Fill";
+            this.fillBtn.UseVisualStyleBackColor = true;
+            this.fillBtn.CheckedChanged += new System.EventHandler(this.fillBtnChanged);
             // 
-            // ColorPatternFill
+            // patternFillBtn
             // 
-            this.ColorPatternFill.AutoSize = true;
-            this.ColorPatternFill.Location = new System.Drawing.Point(11, 93);
-            this.ColorPatternFill.Name = "ColorPatternFill";
-            this.ColorPatternFill.Size = new System.Drawing.Size(90, 20);
-            this.ColorPatternFill.TabIndex = 2;
-            this.ColorPatternFill.TabStop = true;
-            this.ColorPatternFill.Text = "Pattern Fill";
-            this.ColorPatternFill.UseVisualStyleBackColor = true;
+            this.patternFillBtn.AutoSize = true;
+            this.patternFillBtn.Location = new System.Drawing.Point(11, 93);
+            this.patternFillBtn.Name = "patternFillBtn";
+            this.patternFillBtn.Size = new System.Drawing.Size(90, 20);
+            this.patternFillBtn.TabIndex = 2;
+            this.patternFillBtn.TabStop = true;
+            this.patternFillBtn.Text = "Pattern Fill";
+            this.patternFillBtn.UseVisualStyleBackColor = true;
+            this.patternFillBtn.CheckedChanged += new System.EventHandler(this.patternFillBtnChanged);
             // 
-            // radioButton1
+            // nofillBtn
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(11, 41);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(66, 20);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "No Fill";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.nofillBtn.AutoSize = true;
+            this.nofillBtn.Location = new System.Drawing.Point(11, 41);
+            this.nofillBtn.Name = "nofillBtn";
+            this.nofillBtn.Size = new System.Drawing.Size(66, 20);
+            this.nofillBtn.TabIndex = 0;
+            this.nofillBtn.TabStop = true;
+            this.nofillBtn.Text = "No Fill";
+            this.nofillBtn.UseVisualStyleBackColor = true;
+            this.nofillBtn.CheckedChanged += new System.EventHandler(this.noFillBtnChanged);
             // 
             // Form3
             // 
@@ -258,9 +261,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnBgColor;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton ColorFillButton;
-        private System.Windows.Forms.RadioButton ColorPatternFill;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton fillBtn;
+        private System.Windows.Forms.RadioButton patternFillBtn;
+        private System.Windows.Forms.RadioButton nofillBtn;
         private System.Windows.Forms.RadioButton RecBtn;
         private System.Windows.Forms.RadioButton CircleBtn;
         private System.Windows.Forms.ColorDialog cdPenColor;

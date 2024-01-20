@@ -9,6 +9,6 @@ namespace MyPaint.FactoryMethod
 {
     internal interface IShapeFactory
     {
-        MyPaint.Shape CreateShape(Point startPoint, Point endPoint, int border, Color borderColor, Color backgroundColor);
+        Shape CreateShape(Point startPoint, Point endPoint, int border, Color borderColor, Color backgroundColor);
     }
 }

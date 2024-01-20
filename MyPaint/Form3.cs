@@ -21,6 +21,7 @@ namespace MyPaint
         private bool _moving;
         private LinkedList<Shape> _shapes;
         IShapeFactory rectangleFactory;
+        IShapeFactory circleFactory;
         public Form3()
         {
             InitializeComponent();
@@ -29,7 +30,8 @@ namespace MyPaint
             _sPoint = new Point(-1, -1);
             _moving = false;
             _shapes = new LinkedList<Shape>();
-            rectangleFactory = new RectangleFactory();
+            rectangleFactory = new RectangleFactory("nofill");
+            circleFactory = new CircleFactory("nofill");
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -52,15 +54,13 @@ namespace MyPaint
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
                 Shape rectangle = rectangleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
-                FillRectangle_OOP fillRectangle = new FillRectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
-                FillPatternRectangle fillPatternRectangle = new FillPatternRectangle(_sPoint, e.Location, penWidth, penColor, bgColor);
-                if (ColorFillButton.Checked)
+                if (fillBtn.Checked)
                 {
-                    fillRectangle.Fill(_graphic);
+                    rectangle.Fill(_graphic);
                 }
-                if (ColorPatternFill.Checked)
+                if (patternFillBtn.Checked)
                 {
-                    fillPatternRectangle.PatternFill(_graphic);
+                    rectangle.PatternFill(_graphic);
                 }
                 rectangle.Draw(_graphic);
             }
@@ -71,20 +71,29 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                int radius = (int)Math.Sqrt(Math.Pow(e.X - _sPoint.X, 2) + Math.Pow(e.Y - _sPoint.Y, 2));
-                Circle_OOP circle = new Circle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
-                FillCircle_OOP fillCircle = new FillCircle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
-                FillPatternCircle fillPaternCircle = new FillPatternCircle(_sPoint, radius, penWidth, penColor, bgColor);
-                if (ColorFillButton.Checked)
-                {
-                    fillCircle.Fill(_graphic);
-                }
+                //Circle_OOP circle = new Circle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
+                //FillCircle_OOP fillCircle = new FillCircle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
+                //FillPatternCircle fillPaternCircle = new FillPatternCircle(_sPoint, e.Location, penWidth, penColor, bgColor);
+                //if (fillBtn.Checked)
+                //{
+                //    fillCircle.Fill(_graphic);
+                //}
+                //if (patternFillBtn.Checked)
+                //{
+                //    fillPaternCircle.PatternFill(_graphic);
+                //}
 
-                if (ColorPatternFill.Checked)
+                Shape circle = circleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
+                if (fillBtn.Checked)
                 {
-                    fillPaternCircle.PatternFill(_graphic);
+                    circle.Fill(_graphic);
+                }
+                if (patternFillBtn.Checked)
+                {
+                    circle.PatternFill(_graphic);
                 }
                 circle.Draw(_graphic);
+
             }
 
         }
@@ -95,13 +104,7 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                Rectangle_OOP rect = new Rectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
-                FillRectangle_OOP fillRectangle = new FillRectangle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
-                FillPatternRectangle fillPatternRectangle = new FillPatternRectangle(_sPoint, e.Location, penWidth, penColor, bgColor);
-                if (ColorFillButton.Checked)
-                    _shapes.AddLast(fillRectangle);
-                if (ColorPatternFill.Checked)
-                    _shapes.AddLast(fillPatternRectangle);
+                Shape rect = rectangleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
                 _shapes.AddLast(rect);
                 _sPoint.X = -1;
                 _sPoint.Y = -1;
@@ -113,13 +116,7 @@ namespace MyPaint
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
                 int radius = (int)Math.Sqrt(Math.Pow(e.X - _sPoint.X, 2) + Math.Pow(e.Y - _sPoint.Y, 2));
-                Circle_OOP circle = new Circle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
-                FillCircle_OOP fillCircle = new FillCircle_OOP(_sPoint, radius, penWidth, penColor, bgColor);
-                FillPatternCircle fillPaternCircle = new FillPatternCircle(_sPoint, radius, penWidth, penColor, bgColor);
-                if (ColorFillButton.Checked)
-                    _shapes.AddLast(fillCircle);
-                if (ColorPatternFill.Checked)
-                    _shapes.AddLast(fillPaternCircle);
+                Shape circle = circleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
                 _shapes.AddLast(circle);
                 _sPoint.X = -1;
                 _sPoint.Y = -1;
@@ -151,7 +148,6 @@ namespace MyPaint
                     fillPatternCircle.PatternFill(_graphic);
                 }
                 shape.Draw(_graphic);
-
             }
         }
 
@@ -168,6 +164,34 @@ namespace MyPaint
             if (cdBgColor.ShowDialog() == DialogResult.OK)
             {
                 btnBgColor.BackColor = cdBgColor.Color;
+            }
+        }
+
+
+        private void fillBtnChanged(object sender, EventArgs e)
+        {
+            if (fillBtn.Checked)
+            {
+                rectangleFactory = new RectangleFactory("fill");
+                circleFactory = new CircleFactory("fill");
+            }
+        }
+
+        private void patternFillBtnChanged(object sender, EventArgs e)
+        {
+            if (patternFillBtn.Checked)
+            {
+                rectangleFactory = new RectangleFactory("fillpatern");
+                circleFactory = new CircleFactory("fillpatern");
+            }
+        }
+
+        private void noFillBtnChanged(object sender, EventArgs e)
+        {
+            if (nofillBtn.Checked)
+            {
+                rectangleFactory = new RectangleFactory("nofill");
+                circleFactory = new CircleFactory("nofill");
             }
         }
     }

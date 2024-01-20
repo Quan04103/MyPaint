@@ -11,16 +11,29 @@ namespace MyPaint.OOP_Form3.FactoryMethod
 {
     internal class CircleFactory : IShapeFactory
     {
-        public MyPaint.Shape CreateShape(Point center, int radius, int border, Color borderColor, Color backgroundColor)
+        private string type;
+        public CircleFactory(string _type)
         {
-            return new Circle_OOP(center, radius, border, borderColor, backgroundColor);
+            this.type = _type;
         }
-
-
-
-        Shape IShapeFactory.CreateShape(Point startPoint, Point endPoint, int border, Color borderColor, Color backgroundColor)
+        public Shape CreateShape(Point startPoint, Point endPoint, int border, Color borderColor, Color backgroundColor)
         {
-            throw new NotImplementedException();
+            if (type == "fill")
+            {
+                return new FillCircle_OOP(startPoint, endPoint, border, borderColor, backgroundColor);
+            }
+            if (type == "fillpatern")
+            {
+                return new FillPatternCircle(startPoint, endPoint, border, borderColor, backgroundColor);
+            }
+            if (type == "nofill")
+            {
+                return new Circle_OOP(startPoint, endPoint, border, borderColor, backgroundColor);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
