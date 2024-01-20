@@ -71,18 +71,6 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                //Circle_OOP circle = new Circle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
-                //FillCircle_OOP fillCircle = new FillCircle_OOP(_sPoint, e.Location, penWidth, penColor, bgColor);
-                //FillPatternCircle fillPaternCircle = new FillPatternCircle(_sPoint, e.Location, penWidth, penColor, bgColor);
-                //if (fillBtn.Checked)
-                //{
-                //    fillCircle.Fill(_graphic);
-                //}
-                //if (patternFillBtn.Checked)
-                //{
-                //    fillPaternCircle.PatternFill(_graphic);
-                //}
-
                 Shape circle = circleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
                 if (fillBtn.Checked)
                 {
