@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyPaint
 {
-    internal class FillRectangle_OOP : Shape
+    internal class FillRectangle_OOP : Rectangle_OOP
     {
         private List<Rectangle_OOP> rectangles;
 

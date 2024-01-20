@@ -1,5 +1,6 @@
 ﻿using MyPaint.FactoryMethod;
 using MyPaint.OOP;
+using MyPaint.OOP_Form3.AbstractFactory;
 using MyPaint.OOP_Form3.FactoryMethod;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,12 @@ namespace MyPaint
         public Point _sPoint;
         private bool _moving;
         private LinkedList<Shape> _shapes;
-        IShapeFactory rectangleFactory;
-        IShapeFactory circleFactory;
+        //IShapeFactory rectangleFactory;
+        //IShapeFactory circleFactory;
+        //Abstract factory
+        IShapeAbstractFactory factory;
+        Rectangle_OOP rect;
+        Circle_OOP circle;
         public Form3()
         {
             InitializeComponent();
@@ -30,8 +35,11 @@ namespace MyPaint
             _sPoint = new Point(-1, -1);
             _moving = false;
             _shapes = new LinkedList<Shape>();
-            rectangleFactory = new RectangleFactory("nofill");
-            circleFactory = new CircleFactory("nofill");
+            //rectangleFactory = new RectangleFactory("nofill");
+            //circleFactory = new CircleFactory("nofill");
+
+            factory = ShapeFactory.GetFactory("nofill");
+            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -53,16 +61,16 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                Shape rectangle = rectangleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
+                rect = factory.CreateRectangle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 if (fillBtn.Checked)
                 {
-                    rectangle.Fill(_graphic);
+                    rect.Fill(_graphic);
                 }
                 if (patternFillBtn.Checked)
                 {
-                    rectangle.PatternFill(_graphic);
+                    rect.PatternFill(_graphic);
                 }
-                rectangle.Draw(_graphic);
+                rect.Draw(_graphic);
             }
             if (CircleBtn.Checked)
             {
@@ -71,7 +79,7 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                Shape circle = circleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
+                circle = factory.CreateCircle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 if (fillBtn.Checked)
                 {
                     circle.Fill(_graphic);
@@ -81,7 +89,6 @@ namespace MyPaint
                     circle.PatternFill(_graphic);
                 }
                 circle.Draw(_graphic);
-
             }
 
         }
@@ -92,7 +99,7 @@ namespace MyPaint
                 int penWidth = (int)inpPenWidth.Value;
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
-                Shape rect = rectangleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
+                rect = factory.CreateRectangle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 _shapes.AddLast(rect);
                 _sPoint.X = -1;
                 _sPoint.Y = -1;
@@ -104,7 +111,7 @@ namespace MyPaint
                 Color penColor = cdPenColor.Color;
                 Color bgColor = cdBgColor.Color;
                 int radius = (int)Math.Sqrt(Math.Pow(e.X - _sPoint.X, 2) + Math.Pow(e.Y - _sPoint.Y, 2));
-                Shape circle = circleFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
+                circle = factory.CreateCircle(_sPoint, e.Location, penWidth, penColor, bgColor);
                 _shapes.AddLast(circle);
                 _sPoint.X = -1;
                 _sPoint.Y = -1;
@@ -160,8 +167,10 @@ namespace MyPaint
         {
             if (fillBtn.Checked)
             {
-                rectangleFactory = new RectangleFactory("fill");
-                circleFactory = new CircleFactory("fill");
+                //Đây là lí do vì sao dùng abstract factory thay vì dùng factory method
+                //rectangleFactory = new RectangleFactory("fill");
+                //circleFactory = new CircleFactory("fill");
+                factory = ShapeFactory.GetFactory("fill");
             }
         }
 
@@ -169,8 +178,9 @@ namespace MyPaint
         {
             if (patternFillBtn.Checked)
             {
-                rectangleFactory = new RectangleFactory("fillpatern");
-                circleFactory = new CircleFactory("fillpatern");
+            //    rectangleFactory = new RectangleFactory("fillpatern");
+            //    circleFactory = new CircleFactory("fillpatern");
+                factory = ShapeFactory.GetFactory("fillpatern");
             }
         }
 
@@ -178,8 +188,9 @@ namespace MyPaint
         {
             if (nofillBtn.Checked)
             {
-                rectangleFactory = new RectangleFactory("nofill");
-                circleFactory = new CircleFactory("nofill");
+                //rectangleFactory = new RectangleFactory("nofill");
+                //circleFactory = new CircleFactory("nofill");
+                factory = ShapeFactory.GetFactory("fillpatern");
             }
         }
     }

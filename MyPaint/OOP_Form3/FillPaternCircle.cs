@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyPaint.OOP
 {
-    internal class FillPatternCircle : Shape
+    internal class FillPatternCircle : Circle_OOP
     {
         private List<Circle_OOP> circles;
 

@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OOP_Form3\AbstractFactory\FillFactory.cs" />
+    <Compile Include="OOP_Form3\AbstractFactory\FillPaternFactory.cs" />
+    <Compile Include="OOP_Form3\AbstractFactory\IShapeAbstractFactory.cs" />
+    <Compile Include="OOP_Form3\AbstractFactory\NoFillFactory.cs" />
+    <Compile Include="OOP_Form3\AbstractFactory\ShapeFactory.cs" />
     <Compile Include="OOP_Form3\FactoryMethod\CircleFactory.cs" />
     <Compile Include="OOP_Form3\FactoryMethod\IShapeFactory.cs" />
     <Compile Include="OOP_Form3\Circle_OOP.cs" />

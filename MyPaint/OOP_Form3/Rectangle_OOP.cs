@@ -13,6 +13,10 @@ namespace MyPaint
         private int width;
         private int height;
 
+        public Rectangle_OOP(Point location, int border, Color borderColor, Color backgroundColor) : base(location, border, borderColor, backgroundColor)
+        {
+        }
+
         public Rectangle_OOP(Point sPoint, Point ePoint, int border, Color borderColor, Color backgroundColor)
             : base(new Point(Math.Min(sPoint.X, ePoint.X), Math.Min(sPoint.Y, ePoint.Y)), border, borderColor, backgroundColor)
         {
