@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyPaint.FactoryMethod
 {
-    internal interface IShapeFactory
+    internal interface ICreateFactory
     {
         Shape CreateShape(Point startPoint, Point endPoint, int border, Color borderColor, Color backgroundColor);
     }
