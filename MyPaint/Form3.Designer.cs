@@ -47,6 +47,7 @@
             this.nofillBtn = new System.Windows.Forms.RadioButton();
             this.cdPenColor = new System.Windows.Forms.ColorDialog();
             this.cdBgColor = new System.Windows.Forms.ColorDialog();
+            this.btnRandom = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.inpPenWidth)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -123,6 +124,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnRandom);
             this.groupBox1.Controls.Add(this.RecBtn);
             this.groupBox1.Controls.Add(this.CircleBtn);
             this.groupBox1.Location = new System.Drawing.Point(1226, 336);
@@ -146,7 +148,7 @@
             // CircleBtn
             // 
             this.CircleBtn.AutoSize = true;
-            this.CircleBtn.Location = new System.Drawing.Point(22, 108);
+            this.CircleBtn.Location = new System.Drawing.Point(22, 100);
             this.CircleBtn.Name = "CircleBtn";
             this.CircleBtn.Size = new System.Drawing.Size(62, 20);
             this.CircleBtn.TabIndex = 6;
@@ -223,6 +225,17 @@
             this.nofillBtn.UseVisualStyleBackColor = true;
             this.nofillBtn.CheckedChanged += new System.EventHandler(this.noFillBtnChanged);
             // 
+            // btnRandom
+            // 
+            this.btnRandom.AutoSize = true;
+            this.btnRandom.Location = new System.Drawing.Point(22, 143);
+            this.btnRandom.Name = "btnRandom";
+            this.btnRandom.Size = new System.Drawing.Size(80, 20);
+            this.btnRandom.TabIndex = 8;
+            this.btnRandom.TabStop = true;
+            this.btnRandom.Text = "Random";
+            this.btnRandom.UseVisualStyleBackColor = true;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -268,5 +281,6 @@
         private System.Windows.Forms.RadioButton CircleBtn;
         private System.Windows.Forms.ColorDialog cdPenColor;
         private System.Windows.Forms.ColorDialog cdBgColor;
+        private System.Windows.Forms.RadioButton btnRandom;
     }
 }

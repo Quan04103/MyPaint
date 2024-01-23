@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace MyPaint.OOP_Form3.FactoryMethod
 {
-    internal class ShapeFactory : ICreateFact
+    internal class NormalFactory : ICreateFact
     {
         private string type;
-        public ShapeFactory(string _type)
+        public NormalFactory(string _type)
         { 
             this.type = _type;
         }

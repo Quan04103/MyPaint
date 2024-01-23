@@ -21,6 +21,7 @@ namespace MyPaint
         private bool _moving;
         private LinkedList<Shape> _shapes;
         ICreateFact shapeFactory;
+        ICreateFact randomFactory;
         public Form3()
         {
             InitializeComponent();
@@ -29,7 +30,8 @@ namespace MyPaint
             _sPoint = new Point(-1, -1);
             _moving = false;
             _shapes = new LinkedList<Shape>();
-            shapeFactory = new ShapeFactory("rnofill");
+            shapeFactory = new NormalFactory("rnofill");
+            randomFactory = new RandomFactory();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -79,7 +81,16 @@ namespace MyPaint
                     circle.PatternFill(_graphic);
                 }
                 circle.Draw(_graphic);
-
+            }
+            if (btnRandom.Checked)
+            {
+                if (!_moving || (_sPoint == _aPoint)) { return; }
+                RefreshPanel();
+                int penWidth = (int)inpPenWidth.Value;
+                Color penColor = cdPenColor.Color;
+                Color bgColor = cdBgColor.Color;
+                Shape randomShape = randomFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
+                randomShape.Draw(_graphic);
             }
 
         }
@@ -107,6 +118,18 @@ namespace MyPaint
                 _sPoint.X = -1;
                 _sPoint.Y = -1;
                 _moving = false;
+            }
+            if (btnRandom.Checked)
+            {
+                int penWidth = (int)inpPenWidth.Value;
+                Color penColor = cdPenColor.Color;
+                Color bgColor = cdBgColor.Color;
+                Shape randomShape = randomFactory.CreateShape(_sPoint, e.Location, penWidth, penColor, bgColor);
+                _shapes.AddLast(randomShape);
+                _sPoint.X = -1;
+                _sPoint.Y = -1;
+                _moving = false;
+                RefreshPanel();
             }
         }
 
@@ -158,11 +181,11 @@ namespace MyPaint
         {
             if (fillBtn.Checked && RecBtn.Checked)
             {
-                shapeFactory = new ShapeFactory("rfill");
+                shapeFactory = new NormalFactory("rfill");
             }
             if (fillBtn.Checked && CircleBtn.Checked)
             {
-                shapeFactory = new ShapeFactory("cfill");
+                shapeFactory = new NormalFactory("cfill");
             }
         }
 
@@ -170,11 +193,11 @@ namespace MyPaint
         {
             if (patternFillBtn.Checked && RecBtn.Checked)
             {
-                shapeFactory = new ShapeFactory("rfillpatern");
+                shapeFactory = new NormalFactory("rfillpatern");
             }
             if (patternFillBtn.Checked && CircleBtn.Checked)
             {
-                shapeFactory = new ShapeFactory("cfillpatern");
+                shapeFactory = new NormalFactory("cfillpatern");
             }
         }
 
@@ -182,11 +205,11 @@ namespace MyPaint
         {
             if (nofillBtn.Checked && RecBtn.Checked)
             {
-                shapeFactory = new ShapeFactory("rnofill");
+                shapeFactory = new NormalFactory("rnofill");
             }
             if (nofillBtn.Checked && CircleBtn.Checked)
             {
-                shapeFactory = new ShapeFactory("cnofill");
+                shapeFactory = new NormalFactory("cnofill");
             }
         }
     }

@@ -48,7 +48,8 @@
   <ItemGroup>
     <Compile Include="OOP_Form3\Circle_OOP.cs" />
     <Compile Include="OOP_Form3\FactoryMethod\ICreateFact.cs" />
-    <Compile Include="OOP_Form3\FactoryMethod\ShapeFactory.cs" />
+    <Compile Include="OOP_Form3\FactoryMethod\NormalFactory.cs" />
+    <Compile Include="OOP_Form3\FactoryMethod\RandomFactory.cs" />
     <Compile Include="OOP_Form3\FillCircle_OOP.cs" />
     <Compile Include="OOP_Form3\FillPaternCircle.cs" />
     <Compile Include="OOP_Form3\FillPaternRectangle.cs" />
