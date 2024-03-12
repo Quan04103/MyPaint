@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPaint.Bridge;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,9 +20,16 @@ namespace MyPaint
         public int borderWidth;
         public Color borderColor;
         public Color backgroundColor;
+        private RedTheme redTheme;
+
         public MyRectangle()
         {
 
+        }
+
+        public MyRectangle(RedTheme redTheme)
+        {
+            this.redTheme = redTheme;
         }
 
         public MyRectangle(Point sPoint, Point ePoint, int borderWidth, Color borderColor, Color backgroundColor)
@@ -37,9 +45,8 @@ namespace MyPaint
 
         public void Draw(Graphics g )
         {
-                Pen pen = new Pen(borderColor, borderWidth);
-                g.DrawRectangle(pen, location.X, location.Y, width, height);
-                
+            Pen pen = new Pen(borderColor, borderWidth);
+            g.DrawRectangle(pen, location.X, location.Y, width, height);
         }
 
         public void Fill(Graphics g)

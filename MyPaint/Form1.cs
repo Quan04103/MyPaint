@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPaint.Strategy;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,8 @@ namespace MyPaint
         private Point _sPoint;
         private bool _moving;
         private LinkedList<Rectangle> _rectangles;
+        IStrategy strR;
+        MyShape context;
 
         public Form1()
         {
@@ -28,6 +31,9 @@ namespace MyPaint
             _sPoint = new Point(-1, -1);
             _moving = false;
             _rectangles = new LinkedList<Rectangle>();
+            strR = new MyRectangleS();
+
+
         }
 
         private void mainPanel_MouseDown(object sender, MouseEventArgs e)
@@ -45,7 +51,11 @@ namespace MyPaint
             }
             RefreshPanel();
             Rectangle rect = GetRectangle(_sPoint, e.Location);
-            _graphic.DrawRectangle(_pen, rect);
+            if (radioButton2.Checked)
+            {
+                context.setStrategy(strR); 
+                context.DoDraw(_graphic);
+            }
         }
 
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)
@@ -75,6 +85,11 @@ namespace MyPaint
         }
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
