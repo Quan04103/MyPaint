@@ -81,6 +81,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OOP_Form3\Rectangle_OOP.cs" />
     <Compile Include="OOP_Form3\Shape.cs" />
+    <Compile Include="State\DashedState.cs" />
+    <Compile Include="State\DottedState.cs" />
+    <Compile Include="State\MyRectangleState.cs" />
+    <Compile Include="State\SolidState.cs" />
+    <Compile Include="State\State.cs" />
     <Compile Include="Strategy\IStrategy.cs" />
     <Compile Include="Strategy\MyCircleS.cs" />
     <Compile Include="Strategy\MyRectangleS.cs" />

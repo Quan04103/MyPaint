@@ -31,8 +31,9 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.cdPenColor = new System.Windows.Forms.ColorDialog();
             this.cdColorBg = new System.Windows.Forms.ColorDialog();
-            this.RecBtn = new System.Windows.Forms.RadioButton();
-            this.CircleBtn = new System.Windows.Forms.RadioButton();
+            this.SolidBtn = new System.Windows.Forms.RadioButton();
+            this.DottedBtn = new System.Windows.Forms.RadioButton();
+            this.DashedBtn = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -47,37 +48,50 @@
             this.mainPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseMove);
             this.mainPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainPanel_MouseUp);
             // 
-            // RecBtn
+            // SolidBtn
             // 
-            this.RecBtn.AutoSize = true;
-            this.RecBtn.Location = new System.Drawing.Point(1273, 212);
-            this.RecBtn.Name = "RecBtn";
-            this.RecBtn.Size = new System.Drawing.Size(90, 20);
-            this.RecBtn.TabIndex = 7;
-            this.RecBtn.TabStop = true;
-            this.RecBtn.Text = "Rectangle";
-            this.RecBtn.UseVisualStyleBackColor = true;
-            this.RecBtn.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.SolidBtn.AutoSize = true;
+            this.SolidBtn.Location = new System.Drawing.Point(1273, 212);
+            this.SolidBtn.Name = "SolidBtn";
+            this.SolidBtn.Size = new System.Drawing.Size(59, 20);
+            this.SolidBtn.TabIndex = 7;
+            this.SolidBtn.TabStop = true;
+            this.SolidBtn.Text = "Solid";
+            this.SolidBtn.UseVisualStyleBackColor = true;
+            this.SolidBtn.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
-            // CircleBtn
+            // DottedBtn
             // 
-            this.CircleBtn.AutoSize = true;
-            this.CircleBtn.Location = new System.Drawing.Point(1273, 170);
-            this.CircleBtn.Name = "CircleBtn";
-            this.CircleBtn.Size = new System.Drawing.Size(62, 20);
-            this.CircleBtn.TabIndex = 0;
-            this.CircleBtn.TabStop = true;
-            this.CircleBtn.Text = "Circle";
-            this.CircleBtn.UseVisualStyleBackColor = true;
-            this.CircleBtn.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.DottedBtn.AutoSize = true;
+            this.DottedBtn.Location = new System.Drawing.Point(1273, 170);
+            this.DottedBtn.Name = "DottedBtn";
+            this.DottedBtn.Size = new System.Drawing.Size(68, 20);
+            this.DottedBtn.TabIndex = 0;
+            this.DottedBtn.TabStop = true;
+            this.DottedBtn.Text = "Dotted";
+            this.DottedBtn.UseVisualStyleBackColor = true;
+            this.DottedBtn.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // DashedBtn
+            // 
+            this.DashedBtn.AutoSize = true;
+            this.DashedBtn.Location = new System.Drawing.Point(1273, 255);
+            this.DashedBtn.Name = "DashedBtn";
+            this.DashedBtn.Size = new System.Drawing.Size(76, 20);
+            this.DashedBtn.TabIndex = 8;
+            this.DashedBtn.TabStop = true;
+            this.DashedBtn.Text = "Dashed";
+            this.DashedBtn.UseVisualStyleBackColor = true;
+            this.DashedBtn.CheckedChanged += new System.EventHandler(this.DashedBtn_CheckedChanged);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1425, 710);
-            this.Controls.Add(this.RecBtn);
-            this.Controls.Add(this.CircleBtn);
+            this.Controls.Add(this.DashedBtn);
+            this.Controls.Add(this.SolidBtn);
+            this.Controls.Add(this.DottedBtn);
             this.Controls.Add(this.mainPanel);
             this.Name = "Form2";
             this.Text = "Form2";
@@ -91,7 +105,8 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.ColorDialog cdPenColor;
         private System.Windows.Forms.ColorDialog cdColorBg;
-        private System.Windows.Forms.RadioButton RecBtn;
-        private System.Windows.Forms.RadioButton CircleBtn;
+        private System.Windows.Forms.RadioButton SolidBtn;
+        private System.Windows.Forms.RadioButton DottedBtn;
+        private System.Windows.Forms.RadioButton DashedBtn;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MyPaint.Bridge;
+using MyPaint.State;
 using MyPaint.Strategy;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,11 @@ namespace MyPaint
         private Point _aPoint;
         public Point _sPoint;
         private bool _moving;
-        private LinkedList<IStrategy> _rects;
-        private LinkedList<IStrategy> _cirs;
-        private IStrategy strR;
-        private IStrategy strC;
-        private Strategy.MyShape context;
+        private LinkedList<MyRectangleState> listRect;
+        private MyRectangleState rectDefault;
+        private MyRectangleState contextSolid;
+        private MyRectangleState contextDotted;
+        private MyRectangleState contextDashed;
         public Form2()
         {
             InitializeComponent();
@@ -30,11 +31,8 @@ namespace MyPaint
             _aPoint = new Point(-1, -1);
             _sPoint = new Point(-1, -1);
             _moving = false;
-            _rects = new LinkedList<IStrategy>();
-            _cirs = new LinkedList<IStrategy>();
-            strR = new MyRectangleS();
-            strC = new MyCircleS();
-            context = new Strategy.MyShape();
+            listRect = new LinkedList<MyRectangleState>();
+            rectDefault = new MyRectangleState(new Point(50, 50), new Point(150, 150), 2, Color.Black, Color.White);
         }
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)
@@ -52,43 +50,34 @@ namespace MyPaint
         {
             if (!_moving || (_sPoint == _aPoint)) { return; }
             RefreshPanel();
-            if (RecBtn.Checked)
+            if (SolidBtn.Checked)
             {
-                strR = new MyRectangleS(_sPoint, e.Location, 1);
-                context.setStrategy(strR);
-                context.DoDraw(_graphic);
+                rectDefault.TransitionTo(new SolidState());
+                rectDefault.Draw(_graphic);
             }
-            if (CircleBtn.Checked)
+            if (DottedBtn.Checked)
             {
-                strC = new MyCircleS(_sPoint, e.Location, 1);
-                context.setStrategy(strC);
-                context.DoDraw(_graphic);
+                rectDefault.TransitionTo(new DottedState());
+                rectDefault.Draw(_graphic);
+            }
+            if (DashedBtn.Checked)
+            {
+                rectDefault.TransitionTo(new DashedState());
+                rectDefault.Draw(_graphic);
             }
         }
 
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            if (RecBtn.Checked)
+            if (SolidBtn.Checked)
             {
-                strR = new MyRectangleS(_sPoint, e.Location, 1);
-                context.setStrategy(strR);
-                context.DoDraw(_graphic);
-                _rects.AddLast(strR);
+                listRect.AddLast(rectDefault);
             }
-            if (CircleBtn.Checked)
+            if (DottedBtn.Checked)
             {
-                strC = new MyCircleS(_sPoint, e.Location, 1);
-                context.setStrategy(strC);
-                context.DoDraw(_graphic);
-                _cirs.AddLast(strC);
-            }
 
-            //MyRectangle rect = new MyRectangle(_sPoint, e.Location, , penColor, bgColor);
-            //if (checkBoxColor.Checked)
-            //{
-            //    _bgRectangles.AddLast(rect);
-            //}
-            //_noBgRectangles.AddLast(rect);
+                listRect.AddLast(rectDefault);
+            }
             _sPoint.X = -1;
             _sPoint.Y = -1;
             _moving = false;
@@ -97,13 +86,9 @@ namespace MyPaint
         private void RefreshPanel()
         {
             _graphic.Clear(Color.White);
-            foreach (IStrategy str in _rects)
+            foreach (MyRectangleState rect in listRect)
             {
-                 str.Draw(_graphic);
-            }
-            foreach (IStrategy str in _cirs)
-            {
-                 str.Draw(_graphic);
+                 rect.Draw(_graphic);
             }
         }
         private void checkBoxColor_CheckedChanged(object sender, EventArgs e)
@@ -117,6 +102,11 @@ namespace MyPaint
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DashedBtn_CheckedChanged(object sender, EventArgs e)
         {
 
         }
